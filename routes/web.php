@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductController;     //make sure to import ProductController class
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,4 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+//newly created resource route for product , so laravel will know it will we for all the CRUD operations
 Route::resource('products', ProductController::class);
