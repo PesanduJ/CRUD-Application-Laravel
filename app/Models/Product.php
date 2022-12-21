@@ -10,8 +10,4 @@ class Product extends Model
     use HasFactory;
 
     protected $guarded = [];
-
-    // protected $fillable = [
-    //     'id','name','details'            //should be exactly same table column name
-    // ];
 }

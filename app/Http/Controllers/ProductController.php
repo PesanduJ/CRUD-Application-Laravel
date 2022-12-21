@@ -14,7 +14,10 @@ class ProductController extends Controller
      */
     public function index()
     {
+        //get the latest data from database
         $products = Product::latest()->paginate(5);
+
+        //return retrieved data along with the index view + page numbers
         return view('products.index',compact('products'))->with(request()->input('page'));
     }
 
@@ -25,6 +28,7 @@ class ProductController extends Controller
      */
     public function create()
     {
+        //return create view
         return view('products.create');
     }
 
@@ -57,7 +61,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        //return show view along with the particular product id
+        return view('products.show',compact('product'));
     }
 
     /**
@@ -68,7 +73,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        //return edit view along with the particular product id
+        return view('products.edit',compact('product'));
     }
 
     /**
@@ -80,7 +86,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        //validate the input
+        $request->validate([
+            'name' => 'required',
+            'details' => 'required'
+        ]);
+
+        //update product using the product we have already, we dont create a new one
+        $product->update($request->all());
+
+        //redurect the user and send a friendly message
+        return redirect()->route('products.index')->with('success','Product Details Updated Successfully');
     }
 
     /**
